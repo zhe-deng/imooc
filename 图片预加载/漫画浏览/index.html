@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>图片预加载之有序加载</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        .box {
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            padding: 0 10px;
+            margin-right: 50px;
+            color: #333;
+        }
+
+        .btn:hover {
+            background-color: #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <img src="http://oss.mkzcdn.com/page/2011-02-14/132918_3512.jpg!width-800" alt="pic" id="img" width="1200">
+        <p>
+            <a href="#" class="btn" data-control="prev">上一页</a>
+            <a href="#" class="btn" data-control="next">下一页</a>
+        </p>
+    </div>
+
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/plugin/preload.js"></script>
+    <script>
+        var imgs = [
+            'http://oss.mkzcdn.com/page/2011-02-14/132918_3512.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133148_5536.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/132929_7332.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/132944_6556.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/132954_4931.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133002_6861.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133011_4736.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133020_9653.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133034_7250.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133027_7920.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133041_2042.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133048_8746.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133057_7698.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133105_9459.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133115_1883.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133125_4239.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133133_5595.jpg!width-800',
+            'http://oss.mkzcdn.com/page/2011-02-14/133141_1096.jpg!width-800'
+        ];
+
+        var len = imgs.length,
+            index = 0;
+
+        $.preload(imgs, {
+            order: 'ordered'
+        });
+
+
+        $('.btn').on('click', function() {
+            if ('prev' === $(this).data('control')) {
+                index = Math.max(0, --index);
+            } else { //下一张
+                index = Math.min(len - 1, ++index);
+            }
+
+            document.title = (index + 1) + '/' + len;
+
+            $('#img').attr('src', imgs[index]);
+        });
+    </script>
+</body>
+
+</html>
