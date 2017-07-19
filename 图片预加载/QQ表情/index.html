@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片预加载之无序加载——QQ表情</title>
+    <style>
+        body,
+        p,
+        ul,
+        li {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-color: #eee;
+        }
+
+        a {
+            text-decoration: none;
+            outline: none;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .box {
+            margin: 150px 0 0 200px;
+        }
+
+        #face-btn {
+            display: block;
+            background: url(img/icon.gif) no-repeat 0 4px;
+            color: #333;
+            text-indent: 20px;
+        }
+
+        .panel {
+            display: none;
+            width: 600px;
+            padding: 2px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+
+        .loading {
+            text-align: center;
+        }
+
+        .list li {
+            display: inline-block;
+            width: 100px;
+            height: 130px;
+            border: 1px solid #fff;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        .list li img {
+            width: 100%;
+        }
+
+        .list li:hover {
+            border-color: #06c;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <a href="#" id="face-btn">表情</a>
+        <div class="panel">
+            <p class="loading">表情加载中，请稍后...</p>
+        </div>
+    </div>
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="js/plugin/preload.js"></script>
+<script>
+    var $btn = $('#face-btn'),
+        $panel = $('.panel');
+
+    var imgs = [];
+
+    for (var i = 0; i < 14; i++) {
+        imgs[i] = 'face/' + (i + 1) + '.gif';
+    }
+
+    var len = imgs.length;
+
+    $btn.on('click', function(e) {
+        e.stopPropagation();
+        $panel.show();
+
+        $.preload(imgs, {
+            // 这里只需要考虑所有图片加载完成之后因此只需要all
+            all: function() {
+                var html = '';
+
+                html += '<ul class="list">';
+
+                for (var i = 0; i < len; i++) {
+                    html += '<li><img src="' + imgs[i] + '" alt=""></li>'
+                }
+
+                html += '</ul>';
+
+                // $panel.html(html);
+
+                // 这里仅仅是演示需要加入延时
+                setTimeout(function () {
+                    $panel.html(html);
+                }, 1000);
+            }
+        });
+    });
+
+    $(document).on('click', function () {
+        $panel.hide();
+    });
+</script>
+
+</html>
