@@ -21,6 +21,8 @@ $(function () {
         var imgObj = new Image();
 
         $(imgObj).on('load error', function() {
+            // Math.round() 方法可以把一个整数舍入为最接近的整数。
+            // 遵循四舍五入
             $progress.html(Math.round((count + 1) / len * 100) + '%');
 
             if (count >= len - 1) {
