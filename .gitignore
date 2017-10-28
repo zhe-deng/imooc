@@ -1,0 +1,16 @@
+bower_components/
+node_modules/
+.shared/
+bowerRepository.json
+bowerRepositoryPublic.json
+.tmp/
+.sass-cache/
+reports/
+dist/
+npm-debug.log
+.idea/
+**/build/
+
+**/.sass-cache/
+**/*.css.map
+**/*.swp
