@@ -1,0 +1,22 @@
+{
+  "name": "imooc",
+  "version": "0.0.1",
+  "description": "imooc movie",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://dzfuture007:007D700z@github.com/dzfuture007/imooc.git"
+  },
+  "keywords": [
+    "imooc"
+  ],
+  "author": "fdeng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dzfuture007/imooc/issues"
+  },
+  "homepage": "https://github.com/dzfuture007/imooc#readme"
+}
