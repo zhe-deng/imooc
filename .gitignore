@@ -1,6 +1,7 @@
 libs/
 bower_components/
 node_modules/
+node_modules.zip
 .shared/
 bowerRepository.json
 bowerRepositoryPublic.json
