@@ -2,6 +2,7 @@ libs/
 bower_components/
 node_modules/
 node_modules.zip
+node-mongodb.7z
 .shared/
 bowerRepository.json
 bowerRepositoryPublic.json

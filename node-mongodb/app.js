@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var _ = require('./public/libs/underscore/underscore-min');
 var Movie = require('./models/movie');
+var User = require('./models/user');
 var port = process.env.PORT || 3000;
 var app = express();
 
@@ -28,6 +29,13 @@ app.get('/', function(req, res) {
             movies: movies
         });
     });
+});
+
+// signup
+app.post('/user/signup', function(req, res) {
+    var _user = req.body.user;
+
+    console.log(_user);
 });
 
 // detail route
