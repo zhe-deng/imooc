@@ -35,7 +35,72 @@ app.get('/', function(req, res) {
 app.post('/user/signup', function(req, res) {
     var _user = req.body.user;
 
-    console.log(_user);
+    User.findOne({ name: _user.name }, function(err, user) {
+        if (err) {
+            console.log(err);
+        }
+
+        if (user) {
+            return res.redirect('/');
+        } else {
+            var newUser = new User(_user);
+
+            newUser.save(function(err, user) {
+                if (err) {
+                    console.log(err);
+                }
+
+                res.redirect('/admin/userlist');
+            });
+        }
+    });
+
+    // 根据路由的不同来获取数据的方式
+    // req.param('user')
+
+    // /user/signup/:userid
+    // var _userid = req.params.userid;
+
+    // /user/signup/111?userid=1112
+});
+
+// userlist route
+app.get('/admin/userlist', function(req, res) {
+    User.fetch(function(err, users) {
+        if (err) {
+            console.log(err);
+        }
+
+        res.render('userlist', {
+            title: 'user列表页',
+            users: users
+        });
+    });
+});
+
+// signin
+app.post('/user/signin', function(req, res) {
+    var _user = req.body.user;
+    var name = _user.name;
+    var pwd = _user.password;
+
+    User.findOne({ name: name }, function(err, user) {
+        if (err) {
+            console.log(err);
+        }
+
+        if (!user) {
+            return res.redirect('/');
+        }
+
+        if (pwd === user.password) {
+            console.log("Login successfully.");
+            return res.redirect('/');
+        } else {
+            console.log("Password is not correct.");
+        }
+    });
+
 });
 
 // detail route

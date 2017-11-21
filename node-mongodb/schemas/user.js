@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
 
-var MovieSchema = new mongoose.Schema({
+var UserSchema = new mongoose.Schema({
     name: {
         unique: true,
         type: String
@@ -21,7 +21,7 @@ var MovieSchema = new mongoose.Schema({
 });
 
 // pre('save') 意思是说每次在存储数据之前都会来调用一次这个方法
-MovieSchema.pre('save', function(next) {
+UserSchema.pre('save', function(next) {
     var user = this;
 
     if (this.isNew) {
@@ -50,7 +50,7 @@ MovieSchema.pre('save', function(next) {
 });
 
 // 添加静态方法：这些静态方法不会直接跟数据库交互，只有通过model并且实例化之后才会有这个方法
-MovieSchema.statics = {
+UserSchema.statics = {
     fetch: function(cb) {
         return this
             .find({})
@@ -64,4 +64,4 @@ MovieSchema.statics = {
     }
 };
 
-module.exports = MovieSchema;
+module.exports = UserSchema;
